@@ -1,0 +1,59 @@
+[package]
+name = "reznez"
+version = "0.0.0"
+edition = "2024"
+license = "GPL-2.0-only"
+authors = ["Sean Erle Johnson"]
+readme = "README.md"
+documentation = "https://docs.rs/reznez"
+repository = "https://github.com/merehap/reznez.git"
+description = "The high accuracy NES Emulator"
+keywords = ["NES", "Nintendo", "emulator", "highaccuracy"]
+categories = ["emulators", "games"]
+
+[dependencies]
+arr_macro = "0.2.1"
+bitvec = "1.0.1"
+const_panic = "0.2.15"
+crc32fast = "1.4.2"
+enum-iterator = "2.1.0"
+gilrs = "0.11.0"
+image = "0.25"
+itertools = "0.14.0"
+memmap2 = "0.9.5"
+modular-bitfield = "0.12.0"
+num-derive = "0.4.2"
+num-traits = "0.2.19"
+rodio = "0.20.1"
+roxmltree = "0.20.0"
+rusqlite = {version = "0.36.0", features = ["bundled"]}
+splitbits = "0.1.2"
+sscanf = "0.4.3"
+structopt = "0.3.26"
+strum = "0.27.1"
+strum_macros = "0.27.1"
+walkdir = "2.5.0"
+ux = "0.1.6"
+
+egui = "0.34.1"
+egui-wgpu = "0.34.1"
+egui_extras = { version = "0.34.1", features = ["svg"] }
+egui-winit = { version = "0.34.1", default-features = false, features = ["links"] }
+egui_plot = "0.35.0"
+egui_file = "0.26.0"
+
+pixels = "0.17.1"
+
+winit = "0.30.13"
+winit_input_helper = "0.17"
+
+[profile.release]
+debug = true
+
+[dependencies.log]
+version = "0.4.27"
+features = ["std"]
+
+[dev-dependencies]
+dashmap = "6.1.0"
+rayon = "1.10.0"

@@ -17,11 +17,11 @@ use crate::gui::window_renderers::primary_renderer::PrimaryRenderer;
 const PRIMARY_WINDOW_SCALE_FACTOR: f32 = 1.0;
 const WINDOW_DIMENSION: u32 = 500;
 
-pub struct EguiGui<'a> {
-    windows_by_id: BTreeMap<WindowId, EguiWindow<'a>>,
+pub struct EguiGui {
+    windows_by_id: BTreeMap<WindowId, EguiWindow>,
 }
 
-impl <'a> EguiGui<'a> {
+impl EguiGui {
     pub fn new() -> Self {
         Self {
             windows_by_id: BTreeMap::new(),
@@ -57,7 +57,7 @@ impl <'a> EguiGui<'a> {
     }
 }
 
-impl <'a> ApplicationHandler for EguiGui<'a> {
+impl ApplicationHandler for EguiGui {
     fn resumed(&mut self, event_loop: &ActiveEventLoop) {
         let primary_renderer = Box::new(PrimaryRenderer);
         let position = Position::Physical(PhysicalPosition { x: 50, y: 50 });
@@ -101,7 +101,7 @@ impl <'a> ApplicationHandler for EguiGui<'a> {
 }
 
 /// Manages all state required for rendering egui over `Pixels`.
-struct EguiWindow<'a> {
+struct EguiWindow {
     egui_state: egui_winit::State,
     screen_descriptor: ScreenDescriptor,
     wgpu_renderer: Renderer,
@@ -110,11 +110,11 @@ struct EguiWindow<'a> {
 
     // State for the GUI
     window: Arc<Window>,
-    pixels: Pixels<'a>,
+    pixels: Pixels<'static>,
     window_renderer: Box<dyn WindowRenderer>,
 }
 
-impl<'a> EguiWindow<'a> {
+impl EguiWindow {
     fn from_active_event_loop(
         event_loop: &ActiveEventLoop,
         scale_factor: f64,
@@ -153,7 +153,7 @@ impl<'a> EguiWindow<'a> {
         height: u32,
         scale_factor: f32,
         window: Arc<Window>,
-        pixels: pixels::Pixels<'a>,
+        pixels: pixels::Pixels<'static>,
         window_renderer: Box<dyn WindowRenderer>,
     ) -> Self {
         let egui_state = egui_winit::State::new(

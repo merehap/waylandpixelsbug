@@ -127,7 +127,7 @@ impl EguiWindow {
                 .with_inner_size(size)
                 .with_min_inner_size(size)
                 .with_resizable(false)
-                .with_visible(false)
+                .with_visible(true)
                 .with_position(initial_position);
             event_loop.create_window(window_attributes).unwrap()
         };
